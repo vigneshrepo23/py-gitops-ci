@@ -58,14 +58,15 @@ pipeline {
         stage ('update version in github') {
             steps { // withcrendentials snippet - git username & password
                     script {
-                        """
+                        sh """
                         git config --global user.name "vignesh"
                         git config --global user.mail "vignesh@gmail.com"
                         git add deployment.yml
                         git commit -m 'update deployment.yml with current build number'
                         """
                          withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
-                         git push ${GITURL} main
+
+                         sh "git push ${GITURL} main"
                         } 
                     }
              }
