@@ -6,6 +6,7 @@ pipeline {
         IMAGE_NAME = "${DOCKER_USERNAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_CRED = "dockertoken"
+        GITURL = "https://github.com/vigneshrepo23/py-gitops-ci.git"
     }
     stages {
         stage ('cleanup ws') {
@@ -44,13 +45,30 @@ pipeline {
             }
         }
         stage ("update k8s deploy manifest") {
-            steps {
-                script {
+            steps {// sed command - stream editor - find & replace
+                script { // s - string/replace image with any build number with current build number/g global
                     sh """
                         cat deployment.yml
                         sed -i 's/${APP_NAME}.*/${APP_NAME}:${BUILD_NUMBER}/g' deployment.yml
                         cat deployment.yml
                     """
+                }
+            }
+        }
+        stage ('update version in github') {
+            stage {
+                steps {
+                    withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
+                    script {
+                        """
+                        git config --global user.name "vignesh"
+                        git config --global user.mail "vignesh@gmail.com"
+                        git add deployment.yml
+                        git commit -m 'update deployment.yml with current build number'
+                        git push ${GITURL} main
+                        """
+                         } 
+                    }
                 }
             }
         }
