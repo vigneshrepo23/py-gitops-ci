@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockertoken') {
-                        my_image.push("${BUILD_NUMBER}")
+                        my_image.push("$BUILD_NUMBER")
                         my_image.push("latest")
                     }
                 }
