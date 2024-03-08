@@ -28,10 +28,9 @@ pipeline {
         stage('push image to hub') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'dockertoken', url: '') {
-                        my_image.push{"$BUILD_NUMBER"}
-                        my_image.push{"latest"}
-
+                    docker.withRegistry('', 'dockertoken') {
+                        my_image.push("${BUILD_NUMBER}")
+                        my_image.push("latest")
                     }
                 }
             }
