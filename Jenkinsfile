@@ -48,7 +48,7 @@ pipeline {
                 script {
                     sh """
                         cat deployment.yml
-                        sed -i 's/${IMAGE_NAME}.*/${IMAGE_NAME}:${BUILD_NUMBER}/g' deployment.yml
+                        sed -i 's/${APP_NAME}.*/${APP_NAME}:${BUILD_NUMBER}/g' deployment.yml
                         cat deployment.yml
                     """
                 }
