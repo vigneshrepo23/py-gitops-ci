@@ -21,7 +21,7 @@ pipeline {
         stage ('build image') {
             steps {
                 script {
-                   myImage = docker.build "${IMAGE_NAME}":"${TAG}"
+                   myImage = docker.build "${IMAGE_NAME}"
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockertoken') {
-                        myImage.push("$BUILD_NUMBER")
+                        myImage.push("${BUILD_NUMBER}")
                         myImage.push("latest")
                     }
                 }
