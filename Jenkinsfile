@@ -56,7 +56,6 @@ pipeline {
             }
         }
         stage ('update version in github') {
-            stage {
                 steps {
                     withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
                     script {
