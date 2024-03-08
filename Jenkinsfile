@@ -25,23 +25,23 @@ pipeline {
                 }
             }
         }
-        stage('push image to hub') {
-            steps {
-                script {
-                    docker.withRegistry('', 'dockertoken') {
-                        myImage.push("${BUILD_NUMBER}")
-                        myImage.push("latest")
-                    }
-                }
-            }
-        }
-        stage ('rmi image') {
-            steps {
-                script {
-                    sh 'docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}'
-                    sh 'docker rmi ${IMAGE_NAME}:latest'
-                }
-            }
-        }
+        // stage('push image to hub') {
+        //     steps {
+        //         script {
+        //             docker.withRegistry('', 'dockertoken') {
+        //                 myImage.push("${BUILD_NUMBER}")
+        //                 myImage.push("latest")
+        //             }
+        //         }
+        //     }
+        // }
+        // stage ('rmi image') {
+        //     steps {
+        //         script {
+        //             sh 'docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}'
+        //             sh 'docker rmi ${IMAGE_NAME}:latest'
+        //         }
+        //     }
+        // }
     }
 }
