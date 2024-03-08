@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                    myImage = docker.build "${IMAGE_NAME}"
+                   myImage = docker.build "${BUILD_NUMBER}"
                 }
             }
         }
