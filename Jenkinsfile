@@ -56,8 +56,8 @@ pipeline {
             }
         }
         stage ('update version in github') {
-                steps {
-                    withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
                     script {
                         """
                         git config --global user.name "vignesh"
@@ -66,8 +66,7 @@ pipeline {
                         git commit -m 'update deployment.yml with current build number'
                         git push ${GITURL} main
                         """
-                         } 
-                    }
+                    } 
                 }
             }
         }
