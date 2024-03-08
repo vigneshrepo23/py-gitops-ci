@@ -65,7 +65,7 @@ pipeline {
                         git commit -m 'update deployment.yml with current build number'
                         """
                          withCredentials([gitUsernamePassword(credentialsId: 'gitcred', gitToolName: 'Default')]) {
-                         git push ${GITURL} HEAD:main
+                         git push ${GITURL} main
                         } 
                     }
              }
