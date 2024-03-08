@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy
+spec:
+  selector:
+    matchLabels:
+      app: mypy-label
+  template:
+    metadata:
+      labels:
+        app: mypy-label
+    spec:
+      containers:
+      - name: python-con
+        image: vigneshrepo23/python_image:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 7000

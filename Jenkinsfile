@@ -43,5 +43,16 @@ pipeline {
                 }
             }
         }
+        stage ("update k8s deploy manifest") {
+            steps {
+                script {
+                    sh """
+                        cat deployment.yml
+                        sed -i 's/${IMAGE_NAME}.*/${IMAGE_NAME}:${BUILD_NUMBER}/g' deployment.yml
+                        cat deployment.yml
+                    """
+                }
+            }
+        }
     }
 }
