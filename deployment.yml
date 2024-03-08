@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: python-con
-        image: vigneshrepo23/python_image:49
+        image: vigneshrepo23/python_image:50
         resources:
           limits:
             memory: "128Mi"
