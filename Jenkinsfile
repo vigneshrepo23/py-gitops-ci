@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_USERNAME = "vigneshrepo23"
         APP_NAME = "python_image"
-        IMAGE_NAME = "${DOCKER_USERNAME}" + "${APP_NAME}"
+        IMAGE_NAME = "${DOCKER_USERNAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_CRED = "dockertoken"
     }
@@ -21,7 +21,7 @@ pipeline {
         stage ('build image') {
             steps {
                 script {
-                   myImage = docker.build "${IMAGE_NAME}"
+                   myImage = docker.build "${IMAGE_NAME}":"${TAG}"
                 }
             }
         }
