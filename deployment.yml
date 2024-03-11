@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mydeploy
 spec:
-  replicas: 3 #no of pods
+  replicas: 2 #no of pods
   selector:
     matchLabels:
       app: mypy-label
